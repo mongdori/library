@@ -23,6 +23,23 @@ public class Library {
         books.add(book);
     }
 
+    public void printAllBooks() {
+        System.out.println("books = " + books);
+    }
+
+    public Book findByBookName(String name) {
+        for (int i = 0; i < books.size(); i++) {
+            Book book = books.get(i);
+            String bookName = book.getName();
+
+            if (bookName.equals(name)) {
+
+                break;
+            }
+        }
+        return null;
+    }
+
 
 
 
