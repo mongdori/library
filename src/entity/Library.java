@@ -28,20 +28,13 @@ public class Library {
     }
 
     public Book findByBookName(String name) {
-        for (int i = 0; i < books.size(); i++) {
-            Book book = books.get(i);
-            String bookName = book.getName();
-
-            if (bookName.equals(name)) {
-
+        int name1 = books.indexOf("name");
+        for (Book book : books) {
+            if (book.getName().equals(name)) {
+                System.out.println("findedBook = " + book);
                 break;
             }
         }
-        return null;
+        return books.get(name1);
     }
-
-
-
-
-
 }
