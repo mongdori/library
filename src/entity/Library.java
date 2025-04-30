@@ -28,13 +28,13 @@ public class Library {
     }
 
     public Book findByBookName(String name) {
-        int name1 = books.indexOf("name");
+
         for (Book book : books) {
             if (book.getName().equals(name)) {
-                System.out.println("findedBook = " + book);
-                break;
+                System.out.println(book.getName() + "과 동일한 책 이름을 찾았어요!");
+                return book;
             }
         }
-        return books.get(name1);
+        return null;
     }
 }
