@@ -37,4 +37,23 @@ public class Library {
         }
         return null;
     }
+
+    public boolean removeByBookName(String name) {
+        Book removeBook = findByBookName(name);
+        return books.remove(removeBook);
+    }
+
+    /**
+     * setter를 쓰지 않는다는건 불변 객체로 하겠다는 말과 동일.
+     */
+    public boolean updateBookName(String name, String newAuthor, String newIsbn) {
+        for (int i = 0; i < books.size(); i++) {
+            Book book = books.get(i);
+            if (book.getName().equals(name)) {
+                Book set = books.set(i, book);
+                return true;
+            }
+        }
+        return false; // 못 찾음
+    }
 }
