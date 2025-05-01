@@ -45,15 +45,16 @@ public class Library {
 
     /**
      * setter를 쓰지 않는다는건 불변 객체로 하겠다는 말과 동일.
+     * 불변 객체를 수정하기 위해선
      */
-    public boolean updateBookName(String name, String newAuthor, String newIsbn) {
+    public void updateBookName(String name, String newAuthor, String newIsbn) {
         for (int i = 0; i < books.size(); i++) {
             Book book = books.get(i);
             if (book.getName().equals(name)) {
-                Book set = books.set(i, book);
-                return true;
+                Book newBook = new Book(name, newAuthor, newIsbn);
+                books.set(i, newBook);
+                return;
             }
         }
-        return false; // 못 찾음
     }
 }
