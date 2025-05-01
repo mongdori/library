@@ -2,6 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Library {
     /**
@@ -23,38 +24,39 @@ public class Library {
         books.add(book);
     }
 
-    public void printAllBooks() {
-        System.out.println("books = " + books);
-    }
-
-    public Book findByBookName(String name) {
-
-        for (Book book : books) {
-            if (book.getName().equals(name)) {
-                System.out.println(book.getName() + "과 동일한 책 이름을 찾았어요!");
-                return book;
-            }
-        }
-        return null;
-    }
-
+    /**
+     * 1. Optional<>로 감싼다는게 무슨 의미인지?
+     * 2. map()이란?
+     * 3. Optional 객체란?
+     * 4. Optional 객체를 직접 리스트에서 지울 수 없는 이유는?
+     */
     public boolean removeByBookName(String name) {
-        Book removeBook = findByBookName(name);
-        return books.remove(removeBook);
+        Optional<Book> bookOpt = findBook(name);
     }
 
     /**
      * setter를 쓰지 않는다는건 불변 객체로 하겠다는 말과 동일.
      * 불변 객체를 수정하기 위해선
      */
-    public void updateBookName(String name, String newAuthor, String newIsbn) {
+    public boolean updateBookName(String name, String newAuthor, String newIsbn) {
+
         for (int i = 0; i < books.size(); i++) {
             Book book = books.get(i);
             if (book.getName().equals(name)) {
                 Book newBook = new Book(name, newAuthor, newIsbn);
                 books.set(i, newBook);
-                return;
+                return true;
             }
         }
+        return false;
+    }
+
+    private Optional<Book> findBook(String name) {
+        for (Book book : books) {
+            if (book.getName().equals(name)) {
+                return Optional.of(book);
+            }
+        }
+        return Optional.empty();
     }
 }
