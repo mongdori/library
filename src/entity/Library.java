@@ -32,6 +32,7 @@ public class Library {
      */
     public boolean removeByBookName(String name) {
         Optional<Book> bookOpt = findBook(name);
+        return bookOpt.map(books::remove).orElse(false);
     }
 
     /**
