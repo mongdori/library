@@ -39,7 +39,7 @@ public class Library {
      * setter를 쓰지 않는다는건 불변 객체로 하겠다는 말과 동일.
      * 불변 객체를 수정하기 위해선
      */
-    public boolean updateBookName(String name, String newAuthor, String newIsbn) {
+    public boolean updateBookInfo(String name, String newAuthor, String newIsbn) {
 
         for (int i = 0; i < books.size(); i++) {
             Book book = books.get(i);
@@ -53,11 +53,8 @@ public class Library {
     }
 
     private Optional<Book> findBook(String name) {
-        for (Book book : books) {
-            if (book.getName().equals(name)) {
-                return Optional.of(book);
-            }
-        }
-        return Optional.empty();
+        return books.stream()
+                .filter(book -> book.getName().equals(name))
+                .findFirst();
     }
 }
